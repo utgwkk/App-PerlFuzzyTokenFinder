@@ -42,6 +42,7 @@
       },
       "runtime" : {
          "requires" : {
+            "PPI" : "0",
             "perl" : "5.008001"
          }
       },

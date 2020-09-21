@@ -3,9 +3,15 @@ use 5.008001;
 use strict;
 use warnings;
 
+use PPI;
+
 our $VERSION = "0.01";
 
-
+sub _tokenize {
+    my ($class, $expr) = @_;
+    my $tokenizer = PPI::Tokenizer->new(\$expr);
+    return $tokenizer->all_tokens;
+}
 
 1;
 __END__
