@@ -69,6 +69,7 @@ sub _snext_token {
 
     do {
         $token = $token->next_token;
+        return undef unless $token;
     } while ($token && $token->isa('PPI::Token::Whitespace'));
 
     return $token;
