@@ -16,6 +16,65 @@ sub _tokenize {
     return $exclude_whitespace;
 }
 
+# target_tokens: ArrayRef[PPI::Token]
+# find_tokens: ArrayRef[PPI::Token]
+sub _matches {
+    my ($class, $target_tokens, $find_tokens) = @_;
+
+    for my $start (@$target_tokens) {
+        return 1 if $class->_try_match($start, $find_tokens);
+    }
+
+    return 0;
+}
+
+sub _try_match {
+    my ($class, $target_token, $find_tokens) = @_;
+
+    my $idx = 0;
+    while (1) {
+        last unless defined $target_token;
+
+        my $find = $find_tokens->[$idx];
+
+        return 1 unless defined $find;
+
+        if ($find->content eq '...') {
+            # asterisk
+            my $find_next = $find_tokens->[$idx + 1];
+            return 1 unless defined $find_next;
+
+            if ($class->_snext_token($target_token) && $class->_snext_token($target_token)->content eq $find_next->content) {
+                $target_token = $class->_snext_token($target_token);
+                $idx++;
+            } else {
+                $target_token = $class->_snext_token($target_token);
+            }
+        } else {
+            if ($target_token->content eq $find->content) {
+                $target_token = $class->_snext_token($target_token);
+                $idx++;
+            } else {
+                return 0;
+            }
+        }
+    }
+
+    return 1;
+}
+
+# point $token to next significant token
+sub _snext_token {
+    my ($class, $token) = @_;
+
+    do {
+        $token = $token->next_token;
+    } while ($token && $token->isa('PPI::Token::Whitespace'));
+
+    return $token;
+}
+
+
 1;
 __END__
 
