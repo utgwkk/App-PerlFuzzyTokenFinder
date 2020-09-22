@@ -60,7 +60,7 @@ sub _try_match {
         }
     }
 
-    return 1;
+    return 0;
 }
 
 # point $token to next significant token
