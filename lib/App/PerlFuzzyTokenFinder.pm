@@ -9,8 +9,11 @@ our $VERSION = "0.01";
 
 sub _tokenize {
     my ($class, $expr) = @_;
+
     my $tokenizer = PPI::Tokenizer->new(\$expr);
-    return $tokenizer->all_tokens;
+    my $exclude_whitespace = [ grep { ! $_->isa('PPI::Token::Whitespace') } @{$tokenizer->all_tokens} ];
+
+    return $exclude_whitespace;
 }
 
 1;
