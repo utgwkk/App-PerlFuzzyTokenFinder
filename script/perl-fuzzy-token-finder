@@ -1,0 +1,43 @@
+#!/usr/bin/env perl
+use strict;
+use warnings;
+
+use FindBin;
+use lib "$FindBin::Bin/../lib";
+
+use App::PerlFuzzyTokenFinder;
+use PPI;
+
+my $find_token_str = shift @ARGV;
+die "Usage: perl-fuzzy-token-finder <search pattern> <files>" unless $find_token_str;
+
+my $find_tokens = App::PerlFuzzyTokenFinder->tokenize($find_token_str);
+die "Parse `$find_token_str` failed" unless $find_tokens;
+
+my @files = @ARGV;
+my $matched_pos = [];
+
+for my $file (@files) {
+    my $doc = PPI::Document->new($file);
+    die "Parse $file failed" unless $doc;
+
+    my $stmts = $doc->find('PPI::Statement');
+    next unless $stmts;
+
+    for my $stmt (@$stmts) {
+        my $target_tokens = [ $stmt->children ];
+        if (App::PerlFuzzyTokenFinder->matches($target_tokens, $find_tokens)) {
+            push @$matched_pos, { file => $file, line => $stmt->line_number, statement => $stmt->content };
+        }
+    }
+}
+
+exit 1 unless @$matched_pos;
+
+for my $pos (@$matched_pos) {
+    my $file = $pos->{file};
+    my $line = $pos->{line};
+    my $stmt = $pos->{statement};
+
+    printf "%s:%d:%s\n", $file, $line, $stmt;
+}

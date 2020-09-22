@@ -7,7 +7,7 @@ use PPI;
 
 our $VERSION = "0.01";
 
-sub _tokenize {
+sub tokenize {
     my ($class, $expr) = @_;
 
     my $tokenizer = PPI::Tokenizer->new(\$expr);
@@ -18,7 +18,7 @@ sub _tokenize {
 
 # target_tokens: ArrayRef[PPI::Token]
 # find_tokens: ArrayRef[PPI::Token]
-sub _matches {
+sub matches {
     my ($class, $target_tokens, $find_tokens) = @_;
 
     for my $start (@$target_tokens) {
