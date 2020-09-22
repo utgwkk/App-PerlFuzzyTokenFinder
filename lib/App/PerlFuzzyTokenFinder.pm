@@ -40,6 +40,8 @@ sub _try_match {
         return 1 unless defined $find;
 
         if ($find->content eq '...') {
+            return 0 if $target_token->content eq ';';
+
             # asterisk
             my $find_next = $find_tokens->[$idx + 1];
             return 1 unless defined $find_next;
