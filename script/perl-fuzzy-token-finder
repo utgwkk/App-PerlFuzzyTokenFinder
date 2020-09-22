@@ -6,6 +6,7 @@ use FindBin;
 use lib "$FindBin::Bin/../lib";
 
 use App::PerlFuzzyTokenFinder;
+use App::PerlFuzzyTokenFinder::MatchedPosition;
 use PPI;
 
 my $find_token_str = shift @ARGV;
@@ -27,7 +28,12 @@ for my $file (@files) {
     for my $stmt (@$stmts) {
         my $target_tokens = [ $stmt->children ];
         if (App::PerlFuzzyTokenFinder->matches($target_tokens, $find_tokens)) {
-            push @$matched_pos, { file => $file, line => $stmt->line_number, statement => $stmt->content };
+            my $matched = App::PerlFuzzyTokenFinder::MatchedPosition->new(
+                filename    => $file,
+                line_number => $stmt->line_number,
+                statement   => $stmt->clone,
+            );
+            push @$matched_pos, $matched;
         }
     }
 }
@@ -35,9 +41,5 @@ for my $file (@files) {
 exit 1 unless @$matched_pos;
 
 for my $pos (@$matched_pos) {
-    my $file = $pos->{file};
-    my $line = $pos->{line};
-    my $stmt = $pos->{statement};
-
-    printf "%s:%d:%s\n", $file, $line, $stmt;
+    print $pos->format_for_print, "\n";
 }
