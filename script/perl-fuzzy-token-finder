@@ -6,14 +6,18 @@ use FindBin;
 use lib "$FindBin::Bin/../lib";
 
 use App::PerlFuzzyTokenFinder;
+use App::PerlFuzzyTokenFinder::CLI;
 use App::PerlFuzzyTokenFinder::MatchedPosition;
 use PPI;
 
-my $find_token_str = shift @ARGV;
-die "Usage: perl-fuzzy-token-finder <search pattern> <files>" unless $find_token_str;
+die "Usage: perl-fuzzy-token-finder <search pattern> <files>" unless @ARGV;
 
-my $find_tokens = App::PerlFuzzyTokenFinder->tokenize($find_token_str);
-die "Parse `$find_token_str` failed" unless $find_tokens;
+my $cli = App::PerlFuzzyTokenFinder::CLI->new;
+my $find_token_str = shift @ARGV;
+
+$cli->set_find_tokens_from_string($find_token_str);
+
+my $find_tokens = $cli->find_tokens;
 
 my @files = @ARGV;
 my $found = 0;
