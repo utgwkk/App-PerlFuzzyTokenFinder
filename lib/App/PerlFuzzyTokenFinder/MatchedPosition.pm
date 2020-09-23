@@ -38,3 +38,25 @@ sub format_for_print {
 }
 
 1;
+__END__
+
+=head1 NAME
+
+App::PerlFuzzyTokenFinder::MatchedPosition
+
+=head1 DESCRIPTION
+
+App::PerlFuzzyTokenFinder::MatchedPosition is an object representing found position with App::PerlFuzzyTokenFinder.
+
+=head1 LICENSE
+
+Copyright (C) utgwkk.
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
+
+=head1 AUTHOR
+
+utgwkk E<lt>utagawakiki@gmail.comE<gt>
+
+=cut

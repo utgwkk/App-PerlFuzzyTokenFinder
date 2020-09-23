@@ -79,3 +79,25 @@ sub _new_ppi_document {
 }
 
 1;
+__END__
+
+=head1 NAME
+
+App::PerlFuzzyTokenFinder::CLI - command line interface of App::PerlFuzzyTokenFinder
+
+=head1 DESCRIPTION
+
+App::PerlFuzzyTokenFinder::CLI is a command line interface of App::PerlFuzzyTokenFinder, used from perl-fuzzy-token-finder.
+
+=head1 LICENSE
+
+Copyright (C) utgwkk.
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
+
+=head1 AUTHOR
+
+utgwkk E<lt>utagawakiki@gmail.comE<gt>
+
+=cut
