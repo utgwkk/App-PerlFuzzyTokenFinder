@@ -2,13 +2,13 @@
 
 perl-fuzzy-token-finder
 
-# DESCRIPTION
-
-perl-fuzzy-token-finder is a frontend of App::PerlFuzzyTokenFinder.
-
 # SYNOPSIS
 
     $ perl-fuzzy-token-finder 'return ... unless ...'
+
+# DESCRIPTION
+
+perl-fuzzy-token-finder is a fuzzy finder for Perl statements.
 
 # LICENSE
 

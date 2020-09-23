@@ -50,13 +50,13 @@ __END__
 
 perl-fuzzy-token-finder
 
-=head1 DESCRIPTION
-
-perl-fuzzy-token-finder is a frontend of App::PerlFuzzyTokenFinder.
-
 =head1 SYNOPSIS
 
     $ perl-fuzzy-token-finder 'return ... unless ...'
+
+=head1 DESCRIPTION
+
+perl-fuzzy-token-finder is a fuzzy finder for Perl statements.
 
 =head1 LICENSE
 
