@@ -16,7 +16,7 @@ my $find_tokens = App::PerlFuzzyTokenFinder->tokenize($find_token_str);
 die "Parse `$find_token_str` failed" unless $find_tokens;
 
 my @files = @ARGV;
-my $matched_pos = [];
+my $found = 0;
 
 for my $file (@files) {
     my $doc = PPI::Document->new($file);
@@ -33,18 +33,17 @@ for my $file (@files) {
                 line_number => $stmt->line_number,
                 statement   => $stmt->clone,
             );
-            push @$matched_pos, $matched;
+            print $matched->format_for_print, "\n";
+            $found = 1;
         }
     }
 }
 
-exit 1 unless @$matched_pos;
-
-for my $pos (@$matched_pos) {
-    print $pos->format_for_print, "\n";
+if ($found) {
+    exit 0;
+} else {
+    exit 1;
 }
-
-exit 0;
 __END__
 
 =head1 NAME
