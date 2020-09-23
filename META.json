@@ -1,5 +1,5 @@
 {
-   "abstract" : "It's new $module",
+   "abstract" : "Fuzzy finder for Perl statements",
    "author" : [
       "utgwkk <utagawakiki@gmail.com>"
    ],

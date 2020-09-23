@@ -85,7 +85,7 @@ __END__
 
 =head1 NAME
 
-App::PerlFuzzyTokenFinder - It's new $module
+App::PerlFuzzyTokenFinder - Fuzzy finder for Perl statements
 
 =head1 SYNOPSIS
 
@@ -93,7 +93,11 @@ App::PerlFuzzyTokenFinder - It's new $module
 
 =head1 DESCRIPTION
 
-App::PerlFuzzyTokenFinder is ...
+App::PerlFuzzyTokenFinder is a fuzzy finder for Perl statements.
+
+=head1 SEE ALSO
+
+L<perl-fuzzy-token-finder> for command-line usage.
 
 =head1 LICENSE
 
