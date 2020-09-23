@@ -8,6 +8,7 @@ sub new {
     my ($class) = @_;
     bless +{
         find_tokens => undef,
+        target_files => undef,
     }, $class;
 }
 
@@ -19,6 +20,13 @@ sub set_find_tokens_from_string {
     die "Parse `$find_tokens_str` failed" unless $find_tokens;
     
     $self->{find_tokens} = $find_tokens;
+}
+
+sub target_files { shift->{target_files} }
+sub set_target_files {
+    my ($self, $target_files) = @_;
+    
+    $self->{target_files} = $target_files;
 }
 
 1;

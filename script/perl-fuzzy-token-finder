@@ -16,10 +16,11 @@ my $cli = App::PerlFuzzyTokenFinder::CLI->new;
 my $find_token_str = shift @ARGV;
 
 $cli->set_find_tokens_from_string($find_token_str);
+$cli->set_target_files([ @ARGV ]);
 
 my $find_tokens = $cli->find_tokens;
 
-my @files = @ARGV;
+my @files = @{$cli->target_files};
 my $found = 0;
 
 for my $file (@files) {
