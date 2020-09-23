@@ -3,3 +3,4 @@ name = "App-PerlFuzzyTokenFinder"
 module_maker="ModuleBuildTiny"
 static_install = "auto"
 
+readme_from="script/perl-fuzzy-token-finder"

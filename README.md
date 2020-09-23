@@ -1,14 +1,14 @@
 # NAME
 
-App::PerlFuzzyTokenFinder - It's new $module
-
-# SYNOPSIS
-
-    use App::PerlFuzzyTokenFinder;
+perl-fuzzy-token-finder
 
 # DESCRIPTION
 
-App::PerlFuzzyTokenFinder is ...
+perl-fuzzy-token-finder is a frontend of App::PerlFuzzyTokenFinder.
+
+# SYNOPSIS
+
+    $ perl-fuzzy-token-finder 'return ... unless ...'
 
 # LICENSE
 
