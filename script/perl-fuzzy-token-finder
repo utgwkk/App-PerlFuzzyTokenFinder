@@ -13,7 +13,13 @@ my $cli = App::PerlFuzzyTokenFinder::CLI->new;
 my $find_token_str = shift @ARGV;
 
 $cli->set_find_tokens_from_string($find_token_str);
-$cli->set_target_files([ @ARGV ]);
+
+if (@ARGV) {
+    $cli->set_target_files([ @ARGV ]);
+} else {
+    # read Perl code from STDIN
+    $cli->set_target_files([ '-' ]);
+}
 
 my $exit_status = $cli->find;
 exit $exit_status;

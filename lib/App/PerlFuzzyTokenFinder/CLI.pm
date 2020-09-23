@@ -39,7 +39,7 @@ sub find {
     my $found = 0;
 
     for my $file (@{$self->target_files}) {
-        my $doc = PPI::Document->new($file);
+        my $doc = $self->_new_ppi_document($file);
         die "Parse $file failed" unless $doc;
 
         my $stmts = $doc->find('PPI::Statement');
@@ -63,6 +63,18 @@ sub find {
         return 0;
     } else {
         return 1;
+    }
+}
+
+sub _new_ppi_document {
+    my ($self, $file) = @_;
+
+    # treat - as STDIN
+    if ($file eq '-') {
+        my $code = do { local $/; <STDIN> };
+        return PPI::Document->new(\$code);
+    } else {
+        return PPI::Document->new($file);
     }
 }
 
