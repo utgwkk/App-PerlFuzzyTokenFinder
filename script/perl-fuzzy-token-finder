@@ -15,7 +15,8 @@ my $find_token_str = shift @ARGV;
 $cli->set_find_tokens_from_string($find_token_str);
 $cli->set_target_files([ @ARGV ]);
 
-$cli->find;
+my $exit_status = $cli->find;
+exit $exit_status;
 
 __END__
 
